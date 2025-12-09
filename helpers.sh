@@ -1,14 +1,12 @@
 #! /bin/bash
 
-
 venv_name="$1"
-dev_venvv="/home/taibat/environment_bootstrapper/dev_venv/bin/activate"
-prod_venvv="/home/taibat/environment_bootstrapper/prod_venv/bin/activate"
+activate_file="/home/taibat/environment_bootstrapper/$venv_name/bin/activate"
 log_file="/home/taibat/environment_bootstrapper/setup.log"
-dev_requirements="/home/taibat/environment_bootstrapper/dev_directory/dev_requirement.txt"
-prod_requirements="/home/taibat/environment_bootstrapper/prod_directory/prod_requirement.txt"
-dev_gitignore="/home/taibat/environment_bootstrapper/dev_directory/.gitignore"
-prod_gitignore="/home/taibat/environment_bootstrapper/prod_directory/.gitignore"
+notification_requirements="/home/taibat/environment_bootstrapper/notification_directory/requirement.txt"
+payments_requirements="/home/taibat/environment_bootstrapper/payments_directory/requirement.txt"
+notification_gitignore="/home/taibat/environment_bootstrapper/notification_directory/.gitignore"
+payments_gitignore="/home/taibat/environment_bootstrapper/payments_directory/.gitignore"
 RED="\033[31m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
@@ -34,6 +32,3 @@ error() {
 success() {
     echo -e  "[${GREEN}SUCCESS${RESET}] $(timestamp): $1 "
 }
-
-
-

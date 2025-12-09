@@ -19,33 +19,33 @@ fi
 
 create_venv () {
 
-if [ "$venv_name" == "dev_venv" ]
+if [ "$venv_name" == "notification_venv" ]
     then
-        if [ -f "$dev_venvv" ]
+        if [ -f "$activate_file" ]
             then
                 echo "$(success "$venv_name environment found, activating...")" >> "$log_file"
-                source "$dev_venvv"
+                source "$activate_file" >> "$log_file" 2>&1
                 echo "$(success "$venv_name activated...")" >> "$log_file"
 
         else
             echo "$(info "$venv_name environment not found, creating $venv_name...")" >> "$log_file"
-            python3 -m venv "$venv_name"
+            python3 -m  venv "$venv_name">> "$log_file" 2>&1
             echo "$(success "$venv_name environment created, now activating...")" >> "$log_file"
-            source "$dev_venvv"
+            source "$activate_file" >> "$log_file" 2>&1
             echo "$(success "$venv_name activated...")" >> "$log_file"
         fi
-elif [ "$venv_name" == "prod_venv" ]
+elif [ "$venv_name" == "payments_venv" ]
     then
-        if [ -f "$prod_venvv" ]
+        if [ -f "$activate_file" ]
             then
                 echo "$(success "$venv_name environment found, activating...")" >> "$log_file"
-                source "$prod_venvv"
+                source "$activate_file" >> "$log_file" 2>&1
                 echo "$(success "$venv_name activated...")" >> "$log_file"
         else
             echo "$(info "$venv_name environment not found, creating $venv_name....")" >> "$log_file"
-            python3 -m venv "$venv_name"
+            python3 -m venv "$venv_name" >> "$log_file" 2>&1
             echo "$(success "$venv_name environment created, now activating $venv_name....")" >> "$log_file"
-            source "$prod_venvv"
+            source "$activate_file" >> "$log_file" 2>&1
             echo "$(success "$venv_name activated...")" >> "$log_file"
         fi
 else
@@ -57,18 +57,18 @@ fi
 
 pip_upgrade () {
 echo "$(info "Upgrading pip -  $venv_name environment...")" >> "$log_file"
-python -m pip install --upgrade pip
+python3 -m pip install --upgrade pip >> "$log_file" 2>&1
 echo "$(success "Pip upgraded within  $venv_name environment...")" >> "$log_file"
 
-if [ "$venv_name" == "dev_venv" ]
+if [ "$venv_name" == "notification_venv" ]
     then
         echo "$(info "Installing $venv_name dependencies...")" >> "$log_file"
-        pip install -r "$dev_requirements"
+        pip install -r "$notification_requirements" >> "$log_file" 2>&1
         echo "$(success "$venv_name Dependencies successfully installed...")" >> "$log_file"
-elif [ "$venv_name" == "prod_venv" ]
+elif [ "$venv_name" == "payments_venv" ]
     then
         echo "$(info "Installing $venv_name dependencies...")" >> "$log_file"
-        pip install -r "$prod_requirements"
+        pip install -r "$payments_requirements" >> "$log_file" 2>&1
         echo "$(success "$venv_name Dependencies successfully  installed...")" >> "$log_file"
 else
 echo "$(error "$venv_name not recognized, reconfirm you have spelt your environment name correctly...")" >> "$log_file"
@@ -79,21 +79,21 @@ fi
 
 ignore () {
 
-if [ "$venv_name" == "dev_venv" ]
+if [ "$venv_name" == "notification_venv" ]
     then
-        if [ ! -f "$dev_gitignore" ]
+        if [ ! -f "$notification_gitignore" ]
             then
                 echo "$(info ".gitignore file does not exist within $venv_name environment, creating a .gitignore...")" >> "$log_file"
-                touch "$dev_gitignore"
+                touch "$notification_gitignore" >> "$log_file" 2>&1
         else
             echo "$(warning ".gitignore exist, exiting...")" >> "$log_file"
         fi
-elif [ "$venv_name" == "prod_venv" ]
+elif [ "$venv_name" == "payments_venv" ]
     then
-        if [ ! -f "$prod_gitignore" ]
+        if [ ! -f "$payments_gitignore" ]
             then
                 echo "$(info ".gitignore file does not exist within $venv_name environment, creating a .gitignore...")" >> "$log_file"
-                touch "$prod_gitignore"
+                touch "$payments_gitignore" >> "$log_file" 2>&1
         else
             echo "$(warning ".gitignore exist, exiting...")" >> "$log_file"
         fi
