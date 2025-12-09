@@ -79,27 +79,12 @@ fi
 
 ignore () {
 
-if [ "$venv_name" == "notification_venv" ]
+if [ ! -f "$gitignore" ]
     then
-        if [ ! -f "$notification_gitignore" ]
-            then
-                echo "$(info ".gitignore file does not exist within $venv_name environment, creating a .gitignore...")" >> "$log_file"
-                touch "$notification_gitignore" >> "$log_file" 2>&1
-        else
-            echo "$(warning ".gitignore exist, exiting...")" >> "$log_file"
-        fi
-elif [ "$venv_name" == "payments_venv" ]
-    then
-        if [ ! -f "$payments_gitignore" ]
-            then
-                echo "$(info ".gitignore file does not exist within $venv_name environment, creating a .gitignore...")" >> "$log_file"
-                touch "$payments_gitignore" >> "$log_file" 2>&1
-        else
-            echo "$(warning ".gitignore exist, exiting...")" >> "$log_file"
-        fi
-else
-    echo "$(error "$venv_name not recognized, reconfirm you have spelt your environment name correctly...")" >> "$log_file"
-
+        echo "$(info ".gitignore file does not exist, creating a .gitignore...")" >> "$log_file"
+        touch "$gitignore" >> "$log_file" 2>&1
+    else
+        echo "$(warning ".gitignore exist, exiting...")" >> "$log_file"
 fi
 
 }
