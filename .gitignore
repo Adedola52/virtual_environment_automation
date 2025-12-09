@@ -1,4 +1,4 @@
-*.venv/
-*env/
-payments_venv/
-notification_venv/
+.venv
+env
+payments_venv
+notification_venv
