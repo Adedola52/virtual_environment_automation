@@ -74,4 +74,4 @@ cd virtual_environment_automation
 source setup.sh payments_venv
 ```
 
-![Alt text](
+![Alt text](https://github.com/Adedola52/virtual_environment_automation/blob/main/image/env_bootstrapper.png)
